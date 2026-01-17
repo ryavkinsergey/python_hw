@@ -7,6 +7,7 @@ def month_to_season(month):
         return "Лето"
     elif month in (9, 10, 11):
         return "Осень"
+    return None
 
 
 print(month_to_season(5))
