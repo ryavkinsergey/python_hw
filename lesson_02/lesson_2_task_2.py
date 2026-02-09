@@ -1,5 +1,5 @@
-def is_year_leap(years):
-    return years % 4 == 0
+def is_year_leap(year):
+    return year % 4 == 0
 
 
 year = 2024
