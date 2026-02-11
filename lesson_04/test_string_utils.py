@@ -38,6 +38,7 @@ def test_trim_negative_none():
     ("SkyPro", "S", True),
     ("SkyPro", "U", False),
     ("SkyPro", "", True),
+    ("Sky Pro", "r", True),
     ("12345", "3", True)
 ])
 def test_contains_positive(string, symbol, expected):
