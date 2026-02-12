@@ -2,8 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-driver_path = r"C:\Users\blood\PycharmProjects\python_hw\chromedriver-win64\chromedriver.exe"
-
+driver_path = (
+    r"C:\Users\blood\PycharmProjects\python_hw"
+    r"\chromedriver-win64\chromedriver.exe"
+)
 service = Service(executable_path=driver_path)
 driver = webdriver.Chrome(service=service)
 
