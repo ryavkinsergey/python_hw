@@ -1,25 +1,28 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 driver_path = (
     r"C:\Users\blood\PycharmProjects\python_hw"
     r"\chromedriver-win64\chromedriver.exe"
 )
+
 service = Service(executable_path=driver_path)
 driver = webdriver.Chrome(service=service)
 
-driver.implicitly_wait(10)
-
 try:
-    driver.get("http://uitestingplayground.com/dynamicid")
+    driver.get("http://uitestingplayground.com/ajax")
 
-    dynamic_button = driver.find_element(
-        By.XPATH, "//button[text()='Button with Dynamic ID']"
+    driver.find_element(By.ID, "ajaxButton").click()
+
+    waiter = WebDriverWait(driver, 20)
+    success_banner = waiter.until(
+        EC.visibility_of_element_located((By.CSS_SELECTOR, ".bg-success"))
     )
-    dynamic_button.click()
 
-    print("Кнопка успешно нажата")
+    print(success_banner.text)
 
 except Exception as ex:
     print(f"Произошла ошибка: {ex}")
