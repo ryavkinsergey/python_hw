@@ -6,20 +6,20 @@ driver_path = (
     r"C:\Users\blood\PycharmProjects\python_hw"
     r"\chromedriver-win64\chromedriver.exe"
 )
+
 service = Service(executable_path=driver_path)
 driver = webdriver.Chrome(service=service)
 
-driver.implicitly_wait(10)
-
 try:
-    driver.get("http://uitestingplayground.com/classattr")
+    driver.get("http://uitestingplayground.com/textinput")
 
-    blue_button = driver.find_element(By.CSS_SELECTOR, ".btn-primary")
+    input_field = driver.find_element(By.ID, "newButtonName")
+    input_field.send_keys("SkyPro")
+
+    blue_button = driver.find_element(By.ID, "updatingButton")
     blue_button.click()
 
-    alert = driver.switch_to.alert
-    print(f"Текст уведомления: {alert.text}")
-    alert.accept()
+    print(blue_button.text)
 
 except Exception as ex:
     print(f"Произошла ошибка: {ex}")
