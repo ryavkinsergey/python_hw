@@ -20,7 +20,6 @@ def driver():
 
 
 def test_form_validation(driver):
-    # Выносим URL в переменную и разбиваем для соблюдения лимита в 79 символов
     url = (
         "https://bonigarcia.dev/selenium-webdriver-java/"
         "data-types.html"
@@ -44,7 +43,6 @@ def test_form_validation(driver):
 
     assert "alert-danger" in zip_field.get_attribute("class")
 
-    # Переносим элементы списка на новые строки (E501)
     success_fields = [
         "first-name", "last-name", "address", "city",
         "country", "e-mail", "phone", "job-position", "company"
