@@ -1,6 +1,5 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.edge.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -8,12 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.fixture
 def driver():
-    path = (
-        r"C:\Users\blood\PycharmProjects\python_hw"
-        r"\edgedriver_win64\msedgedriver.exe"
-    )
-    service = Service(executable_path=path)
-    driver = webdriver.Edge(service=service)
+    driver = webdriver.Edge()
     driver.implicitly_wait(10)
     yield driver
     driver.quit()
@@ -39,7 +33,8 @@ def test_form_validation(driver):
     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
 
     wait = WebDriverWait(driver, 10)
-    zip_field = wait.until(EC.presence_of_element_located((By.ID, "zip-code")))
+    zip_locator = (By.ID, "zip-code")
+    zip_field = wait.until(EC.presence_of_element_located(zip_locator))
 
     assert "alert-danger" in zip_field.get_attribute("class")
 

@@ -1,7 +1,6 @@
 import pytest
 import time
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,9 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.fixture
 def driver():
-    path = r"C:\Users\blood\PycharmProjects\python_hw\geckodriver.exe"
-    service = Service(executable_path=path)
-    driver = webdriver.Firefox(service=service)
+    driver = webdriver.Firefox()
     driver.implicitly_wait(10)
     yield driver
     driver.quit()
@@ -39,8 +36,9 @@ def test_sauce_shop_purchase(driver):
     driver.find_element(By.ID, "continue").click()
 
     waiter = WebDriverWait(driver, 10)
+    total_locator = (By.CLASS_NAME, "summary_total_label")
     total_element = waiter.until(
-        EC.presence_of_element_located((By.CLASS_NAME, "summary_total_label"))
+        EC.presence_of_element_located(total_locator)
     )
 
     total_text = total_element.text
