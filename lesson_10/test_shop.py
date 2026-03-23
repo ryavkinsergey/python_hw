@@ -1,7 +1,14 @@
+import allure
 from selenium import webdriver
 from shop_page import LoginPage, InventoryPage, CartPage, CheckoutPage
 
 
+@allure.epic("ДЗ №10")
+@allure.feature("Магазин")
+@allure.story("Покупка товаров")
+@allure.title("Тест оформления заказа в SauceDemo")
+@allure.description("Сквозной сценарий: от логина до проверки итоговой суммы")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_saucedemo_purchase():
     driver = webdriver.Firefox()
     driver.implicitly_wait(10)
@@ -22,7 +29,8 @@ def test_saucedemo_purchase():
     checkout = CheckoutPage(driver)
     checkout.fill_form("Ivan", "Ivanov", "123456")
 
-    total = checkout.get_total_price()
+    with allure.step("Проверить итоговую стоимость заказа"):
+        total = checkout.get_total_price()
+        assert total == "$58.29"  # Исправил на реальную сумму из корзины
 
     driver.quit()
-    assert total == "$58.29"
